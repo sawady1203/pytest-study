@@ -24,4 +24,16 @@ def countdown_file(filename):
 
     with open(filename, "a") as fp:
         fp.write(f"\n{(x-1)}")
+
     return x-1
+
+def countdown_sqlite(db, key_name):
+    """
+    SQLiteのcountdownテーブルのkeyで指定したレコードのvalの値を1減らす
+    :param db: SQLiteDBへのConnection
+    :param key_name: キー名
+    :return: 最新のレコードのvalの値
+    """
+    db.execute("update countdown set val = val - 1 where key = ?", (key_name,))
+    SQL_SELECT_VAL = "select val from countdown where key = ?"
+    return db.cursor().execute(SQL_SELECT_VAL, (key_name, )).fetchone()[0]
