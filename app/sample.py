@@ -18,4 +18,10 @@ def countdown_file(filename):
     >>> countdown_file(filename)
     1
     """
-    return 0
+    with open(filename, "r") as fp:
+        lines = fp.readlines()
+    x = int(lines[-1].strip())
+
+    with open(filename, "a") as fp:
+        fp.write(f"\n{(x-1)}")
+    return x-1
