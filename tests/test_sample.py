@@ -1,2 +1,5 @@
+import app.sample
+
+
 def test_sample():
-    pass
+    assert app.sample.countdown(2) == 1
